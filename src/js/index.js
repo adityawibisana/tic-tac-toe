@@ -1,10 +1,10 @@
 // JavaScript Document
 $(document).ready(function () {
-    var x = "x"
-    var o = "o"
-    var count = 0;
-    var o_win = 0;
-    var x_win = 0;
+    const x = "x";
+    const o = "o";
+    let count = 0;
+    let o_win = 0;
+    let x_win = 0;
     $('#game li').click(function () {
 
         if (isOWin()) {
