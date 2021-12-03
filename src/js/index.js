@@ -69,6 +69,31 @@ $(document).ready(function () {
             return $("#one").hasClass('x') && $("#two").hasClass('x') && $("#three").hasClass('x') || $("#four").hasClass('x') && $("#five").hasClass('x') && $("#six").hasClass('x') || $("#seven").hasClass('x') && $("#eight").hasClass('x') && $("#nine").hasClass('x') || $("#one").hasClass('x') && $("#four").hasClass('x') && $("#seven").hasClass('x') || $("#two").hasClass('x') && $("#five").hasClass('x') && $("#eight").hasClass('x') || $("#three").hasClass('x') && $("#six").hasClass('x') && $("#nine").hasClass('x') || $("#one").hasClass('x') && $("#five").hasClass('x') && $("#nine").hasClass('x') || $("#three").hasClass('x') && $("#five").hasClass('x') && $("#seven").hasClass('x')
         }
 
+        /**
+         * Check whether specified character win the game, based on its horizontal position
+         * @param {Array.<string[]>} boxes 2 dimensional array
+         * @param {String} character O or X
+         * @returns {Boolean} true, if specified character win
+         */
+        function isWinningHorizontal(boxes, character) {
+            let counter = 0
+            for (let i = 0; i < boxes.length; i++) {
+                const box = boxes[i];
+                for (let j = 0; j < box.length; j++) {
+                    if (box[i][j] === character) {
+                        counter++
+                    } else {
+                        counter = 0
+                    }
+
+                    if (counter === MATCH_NUMBER) { // we have winner
+                        return true
+                    }
+                }
+                counter = 0
+            }
+            return false
+        }
     });
     $("#reset").click(function () {
         $("#game li").text("+");
