@@ -4,7 +4,7 @@ const tictactoesolver = require('./tictactoesolver');
 const boxesHorizontalTest1 = [
     ["O", "X", "O"],
     ["X", "X", "X"],
-    ["O", "X", "O"],
+    ["O", "-", "O"],
 ];
 expect(tictactoesolver.isWinningHorizontal(boxesHorizontalTest1, "X")).toBe(true)
 expect(tictactoesolver.isWinningHorizontal(boxesHorizontalTest1, "O")).toBe(false)
