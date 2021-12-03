@@ -27,6 +27,15 @@ const boxesDiagonalTest1 = [
 expect(tictactoesolver.isWinningDiagonal(boxesDiagonalTest1, "X")).toBe(true)
 expect(tictactoesolver.isWinningDiagonal(boxesDiagonalTest1, "O")).toBe(false)
 
+const boxesDiagonalBackTest1 = [
+    ["O", "X", "X", "O"],
+    ["O", "O", "O", "X"],
+    ["O", "X", "X", "X"],
+    ["O", "X", "X", "O"],
+]
+expect(tictactoesolver.isWinningDiagonalBack(boxesDiagonalBackTest1, "X")).toBe(true)
+expect(tictactoesolver.isWinningDiagonalBack(boxesDiagonalBackTest1, "O")).toBe(false)
+
 // Currently, just print to prevent confusion
 // In case tests are wrong, there will be some messages on the console.
 console.log("All tests have been passed")

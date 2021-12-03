@@ -89,21 +89,26 @@ module.exports = {
     },
 
     /**
-    * Check whether specified character win the game, based on its diagonal-right position
+    * Check whether specified character win the game, based on its diagonal-back position
     * @param {Array.<string[]>} boxes 2 dimensional array containing O or X
     * @param {String} character O or X
     * @returns {Boolean} true, if specified character win
     */
-    isWinningDiagonalRight: (boxes, character) => {
+    isWinningDiagonalBack: (boxes, character) => {
         for (let i = 0; i < boxes.length; i++) {
             let box = boxes[i];
-            for (let j = box.length - 1; j > 0; j--) {
+            for (let j = box.length - 1; j >= 0; j--) {
+                counter = 0;
                 if (boxes[i][j] === character) {
                     counter++
-                    while (i < boxes.length && j > 0) {
-                        i--;
-                        j++;
-                        if (boxes[i][j] === character) {
+
+                    // use new variable because we don't want to interfere current iteration
+                    let row = i;
+                    let column = j;
+                    while (row + 1 < box.length && column - 1 >= 0) {
+                        row++;
+                        column--;
+                        if (boxes[row][column] === character) {
                             counter++
                         } else {
                             counter = 0
@@ -115,7 +120,6 @@ module.exports = {
                     }
                 }
             }
-            counter = 0
         }
         return false
     }
