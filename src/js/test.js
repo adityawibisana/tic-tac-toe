@@ -8,10 +8,12 @@ const boxesHorizontalPositiveTest1 = [
 ];
 const boxesHorizontalPositiveTest2 = [
     ["O", "X", "X", "O"],
-    ["O", "O", "O", "O"],
+    ["O", "O", "X", "O"],
     ["O", "X", "X", "X"],
     ["O", "O", "X", "O"],
 ]
 expect(tictactoesolver.isWinningHorizontal(boxesHorizontalPositiveTest1, "X")).toBe(true)
 expect(tictactoesolver.isWinningHorizontal(boxesHorizontalPositiveTest2, "X")).toBe(true)
+
+console.log("All test has been passed")
 

@@ -1,0 +1,29 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "Tic tac toe for FWD interview",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb": "^19.0.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-react": "^7.27.1",
+    "expect.js": "^0.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test-windows": "node .\\src\\js\\test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adityawibisana/tic-tac-toe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adityawibisana/tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/adityawibisana/tic-tac-toe#readme"
+}
