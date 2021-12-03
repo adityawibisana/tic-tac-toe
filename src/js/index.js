@@ -5,8 +5,11 @@ $(document).ready(function () {
     let count = 0;
     let o_win = 0;
     let x_win = 0;
-    $('#game li').click(function () {
 
+    let boxes = [[]]
+    const MATCH_NUMBER = 3
+
+    $('#game li').click(function () {
         if (isOWin()) {
             alert('O has won the game. Start a new game')
             $("#game li").text("+");
@@ -94,6 +97,33 @@ $(document).ready(function () {
             }
             return false
         }
+
+        /**
+         * Check whether specified character win the game, based on its vertical position
+         * @param {Array.<string[]>} boxes 2 dimensional array containing O or X
+         * @param {String} character O or X
+         * @returns {Boolean} true, if specified character win
+         */
+        function isWinningVertical(boxes, character) {
+            let counter = 0
+            for (let j = 0; j < boxes.length; j++) {
+                for (let i = 0; i < boxes.length; i++) {
+                    const box = boxes[i];
+                    if (box[i][j] === character) {
+                        counter++
+                    } else {
+                        counter = 0
+                    }
+
+                    if (counter === MATCH_NUMBER) {
+                        return true
+                    }
+                }
+                counter = 0
+            }
+            return false
+        }
+
     });
     $("#reset").click(function () {
         $("#game li").text("+");
