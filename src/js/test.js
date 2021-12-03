@@ -11,7 +11,7 @@ expect(tictactoesolver.isWinningHorizontal(boxesHorizontalTest1, "O")).toBe(fals
 
 const boxesHorizontalTest2 = [
     ["O", "X", "X", "O"],
-    ["O", "O", "X", "O"],
+    ["O", "O", "-", "O"],
     ["O", "X", "X", "X"],
     ["O", "O", "X", "O"],
 ]
@@ -19,9 +19,9 @@ expect(tictactoesolver.isWinningHorizontal(boxesHorizontalTest2, "X")).toBe(true
 expect(tictactoesolver.isWinningHorizontal(boxesHorizontalTest2, "O")).toBe(false)
 
 const boxesDiagonalTest1 = [
-    ["O", "X", "X", "O"],
-    ["O", "O", "X", "O"],
-    ["O", "X", "X", "X"],
+    ["O", "X", "X", "-"],
+    ["O", "-", "X", "O"],
+    ["X", "-", "-", "X"],
     ["O", "O", "X", "O"],
 ]
 expect(tictactoesolver.isWinningDiagonal(boxesDiagonalTest1, "X")).toBe(true)
@@ -29,9 +29,9 @@ expect(tictactoesolver.isWinningDiagonal(boxesDiagonalTest1, "O")).toBe(false)
 
 const boxesDiagonalBackTest1 = [
     ["O", "X", "X", "O"],
-    ["O", "O", "O", "X"],
-    ["O", "X", "X", "X"],
-    ["O", "X", "X", "O"],
+    ["O", "-", "O", "X"],
+    ["-", "-", "X", "-"],
+    ["O", "X", "-", "O"],
 ]
 expect(tictactoesolver.isWinningDiagonalBack(boxesDiagonalBackTest1, "X")).toBe(true)
 expect(tictactoesolver.isWinningDiagonalBack(boxesDiagonalBackTest1, "O")).toBe(false)
@@ -39,8 +39,8 @@ expect(tictactoesolver.isWinningDiagonalBack(boxesDiagonalBackTest1, "O")).toBe(
 const boxesVerticalTest1 = [
     ["O", "X", "X", "O"],
     ["X", "O", "O", "X"],
-    ["O", "X", "X", "X"],
-    ["O", "X", "X", "X"],
+    ["O", "X", "-", "X"],
+    ["O", "X", "-", "X"],
 ]
 expect(tictactoesolver.isWinningVertical(boxesVerticalTest1, "X")).toBe(true)
 expect(tictactoesolver.isWinningVertical(boxesVerticalTest1, "O")).toBe(false)
