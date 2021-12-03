@@ -65,20 +65,23 @@ module.exports = {
             for (let j = 0; j < box.length; j++) {
                 if (boxes[i][j] === character) {
                     counter++
-                    while (i < boxes.length && j < box.length) {
-                        i++;
-                        j++;
-                        if (boxes[i][j] === character) {
+                    // use new variable because we don't want to interfere current iteration
+                    let row = i;
+                    let column = j;
+                    while (row + 1 < boxes.length && column + 1 < box.length) {
+                        row++;
+                        column++;
+                        if (boxes[row][column] === character) {
                             counter++
                         } else {
                             counter = 0
                         }
-
                         if (counter === MATCH_NUMBER) {
                             return true
                         }
                     }
                 }
+                counter = 0;
             }
             counter = 0
         }
