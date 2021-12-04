@@ -22,6 +22,9 @@
           <span class="add-on win_text">X won</span><strong id="x_win" class="win_times add-on">0</strong><span
             class="add-on">time(s)</span>
         </div>
+        <div class="input-prepend input-append">
+          <span class="add-on win_text">Size</span><input id="board_size" class="win_times add-on" value="7" />
+        </div>
       </div>
     </div>
   </div>
@@ -32,7 +35,29 @@
   <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
   <script src="js/index.js"></script>
   <script>
-    // one box is around 46px
+    let boardSize = 7
+
+    $("#board_size").change(function () {
+      const size = parseInt(this.value, 10)
+      if (!isNaN(size) && size >= 3) {
+        boardSize = size
+        draw()
+      }
+    })
+
+    function draw() {
+      $('#game').empty()
+      $('#game').append('<tr></tr>')
+      for (let i = 0; i < boardSize; i++) {
+        let content = `<tr>`
+        for (let j = 0; j < boardSize; j++) {
+          content += `<td><div id=${i}-${j} class="btn span1 basebox">+</div></td>`;
+        }
+        content += `</tr>`;
+        $('#game tr:last').after(content);
+      }
+    }
+
     $(document).ready(function () {
       let count = 0;
       const x = "X";
@@ -40,21 +65,10 @@
       let o_win = 0;
       let x_win = 0;
 
-      let boxes = new Array(7).fill("-").map(() => new Array(7).fill("-"));
+      let boxes = new Array(boardSize).fill("-").map(() => new Array(boardSize).fill("-"));
       const MATCH_NUMBER = 3
 
       draw()
-      function draw() {
-        for (let i = 0; i < 7; i++) {
-          let content = `<tr>`
-          for (let j = 0; j < 7; j++) {
-            content += `<td><div id=${i}-${j} class="btn span1 basebox">+</div></td>`;
-          }
-          content += `</tr>`;
-          $('#game tr:last').after(content);
-        }
-      }
-
       $('#game td div').click(function () {
         if ($(this).hasClass('disable')) {
           return alert('Already selected')
@@ -77,9 +91,9 @@
         const column = parseInt(this.id.split('-')[1])
         boxes[row][column] = character
 
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < boardSize; i++) {
           let printChar = ""
-          for (let j = 0; j < 7; j++) {
+          for (let j = 0; j < boardSize; j++) {
             printChar += `${boxes[i][j]}`
           }
           console.log(printChar)
@@ -105,7 +119,7 @@
           $("#game td div").removeClass('x')
           $("#game td div").removeClass('btn-primary')
           $("#game td div").removeClass('btn-info')
-          boxes = new Array(7).fill("-").map(() => new Array(7).fill("-"));
+          boxes = new Array(boardSize).fill("-").map(() => new Array(boardSize).fill("-"));
         }, 0);
       }
 
