@@ -87,9 +87,11 @@
 
         if (isWin(boxes, x)) {
           x_win++;
+          $('#x_win').html(`${x_win}`)
           reset(x)
         } else if (isWin(boxes, o)) {
           o_win++;
+          $('#o_win').html(`${o_win}`)
           reset(o)
         }
       });
