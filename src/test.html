@@ -45,7 +45,7 @@
     let boxes = new Array(boardSize).fill("-").map(() => new Array(boardSize).fill("-"));
     const MATCH_NUMBER = 3
 
-    $("#board_size").change(function () {
+    $("#board_size").on("input", function () {
       const size = parseInt(this.value, 10)
       if (!isNaN(size) && size >= 3) {
         boardSize = size
