@@ -23,7 +23,7 @@
       const x = "X";
       const o = "O";
 
-      let boxes = new Array(7).fill(0).map(() => new Array(7444).fill(0));
+      let boxes = new Array(7).fill("-").map(() => new Array(7).fill("-"));
       const MATCH_NUMBER = 3
 
       draw()
@@ -32,7 +32,6 @@
           let content = `<tr>`
           for (let j = 0; j < 7; j++) {
             content += `<td><div id=${i}-${j} class="btn span1 basebox">+</div></td>`;
-            boxes[i][j] = "-"
           }
           content += `</tr>`;
           $('#game tr:last').after(content);
