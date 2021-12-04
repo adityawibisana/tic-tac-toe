@@ -8,7 +8,7 @@ $(document).ready(function () {
     let x_win = 0;
 
     let boxes = new Array(boardSize).fill("-").map(() => new Array(boardSize).fill("-"));
-    const MATCH_NUMBER = 3
+    let match = 3
 
     reDraw()
 
@@ -17,6 +17,13 @@ $(document).ready(function () {
         if (!isNaN(size) && size >= 3) {
             boardSize = size
             reDraw()
+        }
+    })
+
+    $("#match").on("input", function () {
+        const size = parseInt(this.value, 10)
+        if (!isNaN(size) && size >= 3) {
+            match = size
         }
     })
 
@@ -115,7 +122,7 @@ $(document).ready(function () {
                     counter = 0
                 }
 
-                if (counter === MATCH_NUMBER) { // we have winner
+                if (counter === match) { // we have winner
                     return true
                 }
             }
@@ -141,7 +148,7 @@ $(document).ready(function () {
                     counter = 0
                 }
 
-                if (counter === MATCH_NUMBER) {
+                if (counter === match) {
                     return true
                 }
             }
@@ -174,7 +181,7 @@ $(document).ready(function () {
                         } else {
                             counter = 0
                         }
-                        if (counter === MATCH_NUMBER) {
+                        if (counter === match) {
                             return true
                         }
                     }
@@ -212,7 +219,7 @@ $(document).ready(function () {
                             counter = 0
                         }
 
-                        if (counter === MATCH_NUMBER) {
+                        if (counter === match) {
                             return true
                         }
                     }
