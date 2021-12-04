@@ -4,16 +4,17 @@
   "description": "Tic tac toe for FWD interview",
   "main": "app.js",
   "dependencies": {
+    "expect": "^27.4.2",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
     "eslint": "^8.3.0",
     "eslint-config-airbnb": "^19.0.1",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.27.1",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "expect": "^27.4.2",
-    "express": "^4.17.1"
+    "eslint-plugin-react-hooks": "^4.3.0"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node app.js",
     "test-windows": "node .\\js\\test.js",
