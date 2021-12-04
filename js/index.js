@@ -76,6 +76,11 @@ $(document).ready(function () {
                 o_win++;
                 $('#o_win').html(`${o_win}`)
                 showWinnerAndReset(o)
+            } else if (count >= boardSize * boardSize) {
+                setTimeout(() => {
+                    alert(`Tie. Game will be restarted`)
+                    reset()
+                }, 0);
             }
         });
         reset()
@@ -96,6 +101,7 @@ $(document).ready(function () {
         $("#game td div").removeClass('btn-primary')
         $("#game td div").removeClass('btn-info')
         boxes = new Array(boardSize).fill("-").map(() => new Array(boardSize).fill("-"));
+        count = 0
     }
 
     function isWin(boxes, character) {
