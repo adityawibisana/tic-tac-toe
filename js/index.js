@@ -8,7 +8,7 @@ $(document).ready(function () {
     let x_win = 0;
 
     let boxes = new Array(boardSize).fill("-").map(() => new Array(boardSize).fill("-"));
-    const MATCH_NUMBER = 3
+    let match = 3
 
     reDraw()
 
@@ -17,6 +17,13 @@ $(document).ready(function () {
         if (!isNaN(size) && size >= 3) {
             boardSize = size
             reDraw()
+        }
+    })
+
+    $("#match").on("input", function () {
+        const size = parseInt(this.value, 10)
+        if (!isNaN(size) && size >= 3) {
+            match = size
         }
     })
 
@@ -69,6 +76,11 @@ $(document).ready(function () {
                 o_win++;
                 $('#o_win').html(`${o_win}`)
                 showWinnerAndReset(o)
+            } else if (count >= boardSize * boardSize) {
+                setTimeout(() => {
+                    alert(`Tie. Game will be restarted`)
+                    reset()
+                }, 0);
             }
         });
         reset()
@@ -89,6 +101,7 @@ $(document).ready(function () {
         $("#game td div").removeClass('btn-primary')
         $("#game td div").removeClass('btn-info')
         boxes = new Array(boardSize).fill("-").map(() => new Array(boardSize).fill("-"));
+        count = 0
     }
 
     function isWin(boxes, character) {
@@ -115,7 +128,7 @@ $(document).ready(function () {
                     counter = 0
                 }
 
-                if (counter === MATCH_NUMBER) { // we have winner
+                if (counter === match) { // we have winner
                     return true
                 }
             }
@@ -141,7 +154,7 @@ $(document).ready(function () {
                     counter = 0
                 }
 
-                if (counter === MATCH_NUMBER) {
+                if (counter === match) {
                     return true
                 }
             }
@@ -174,7 +187,7 @@ $(document).ready(function () {
                         } else {
                             counter = 0
                         }
-                        if (counter === MATCH_NUMBER) {
+                        if (counter === match) {
                             return true
                         }
                     }
@@ -212,7 +225,7 @@ $(document).ready(function () {
                             counter = 0
                         }
 
-                        if (counter === MATCH_NUMBER) {
+                        if (counter === match) {
                             return true
                         }
                     }
