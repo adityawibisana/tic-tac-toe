@@ -10,11 +10,6 @@
 </head>
 
 <body>
-  <!-- <div id="tic-tac-toe">
-    <table id="game" align="center">
-      <tr></tr>
-    </table>
-  </div> -->
   <table id="game" align="center">
     <tr></tr>
   </table>
@@ -25,14 +20,17 @@
     // one box is around 46px
     $(document).ready(function () {
       let count = 0;
+      const x = "X";
+      const o = "O";
+      let boxes = [[]]
 
       draw()
       function draw() {
         for (let i = 0; i < 7; i++) {
           let content = `<tr>`
           for (let j = 0; j < 7; j++) {
-            // content += `<td><div class="btn">i:${i} j:${j}</div></td>`;
-            content += `<td><div class="btn span1 basebox">+</div></td>`;
+            content += `<td><div id=${i}-${j} class="btn span1 basebox">+</div></td>`;
+            boxes[i][j] = "-"
           }
           content += `</tr>`;
           $('#game tr:last').after(content);
@@ -44,18 +42,22 @@
           return alert('Already selected')
         }
 
+        let character = "-"
+        if (count % 2 === 0) {
+          $(this).text(o)
+          $(this).addClass('o btn-primary');
+          character = o
+        } else {
+          $(this).text(x)
+          $(this).addClass('x btn-info');
+          character = x
+        }
         count++
         $(this).addClass('disable');
 
-        if (count % 2 === 1) {
-          $(this).text("o")
-          $(this).addClass('o btn-primary');
-        } else {
-          $(this).text("x")
-          $(this).addClass('x btn-info');
-        }
-
-
+        const row = parseInt(this.id.split('-')[0])
+        const column = parseInt(this.id.split('-')[1])
+        boxes[i][j] = character
 
       });
     })
