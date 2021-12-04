@@ -24,6 +24,8 @@
   <script>
     // one box is around 46px
     $(document).ready(function () {
+      let count = 0;
+
       draw()
       function draw() {
         for (let i = 0; i < 7; i++) {
@@ -41,8 +43,20 @@
         if ($(this).hasClass('disable')) {
           return alert('Already selected')
         }
-        $(this).text("o")
-        $(this).addClass('disable o btn-primary');
+
+        count++
+        $(this).addClass('disable');
+
+        if (count % 2 === 1) {
+          $(this).text("o")
+          $(this).addClass('o btn-primary');
+        } else {
+          $(this).text("x")
+          $(this).addClass('x btn-info');
+        }
+
+
+
       });
     })
   </script>
