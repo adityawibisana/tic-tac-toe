@@ -22,6 +22,8 @@
       let count = 0;
       const x = "X";
       const o = "O";
+      let o_win = 0;
+      let x_win = 0;
 
       let boxes = new Array(7).fill("-").map(() => new Array(7).fill("-"));
       const MATCH_NUMBER = 3
@@ -69,12 +71,26 @@
         }
 
         if (isWin(boxes, x)) {
-          console.log(`${x} is winner`)
+          x_win++;
+          reset(x)
         } else if (isWin(boxes, o)) {
-          console.log(`${o} is winner`)
+          o_win++;
+          reset(o)
         }
-
       });
+
+      function reset(winner) {
+        setTimeout(() => {
+          alert(`${winner} has won the game. Game will be restarted`)
+          $("#game td div").text("+");
+          $("#game td div").removeClass('disable')
+          $("#game td div").removeClass('o')
+          $("#game td div").removeClass('x')
+          $("#game td div").removeClass('btn-primary')
+          $("#game td div").removeClass('btn-info')
+          boxes = new Array(7).fill("-").map(() => new Array(7).fill("-"));
+        }, 0);
+      }
 
       function isWin(boxes, character) {
         return isWinningHorizontal(boxes, character)
