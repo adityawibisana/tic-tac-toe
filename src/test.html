@@ -22,7 +22,7 @@
       let count = 0;
       const x = "X";
       const o = "O";
-      let boxes = [[]]
+      let boxes = new Array(7).fill(0).map(() => new Array(7444).fill(0));
 
       draw()
       function draw() {
@@ -58,6 +58,14 @@
         const row = parseInt(this.id.split('-')[0])
         const column = parseInt(this.id.split('-')[1])
         boxes[row][column] = character
+
+        for (let i = 0; i < 7; i++) {
+          let printChar = ""
+          for (let j = 0; j < 7; j++) {
+            printChar += `${boxes[i][j]}`
+          }
+          console.log(printChar)
+        }
 
       });
     })
