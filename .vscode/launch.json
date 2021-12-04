@@ -6,12 +6,6 @@
     "configurations": [
         {
             "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}\\src\\js\\test.js"
-        },
-        {
-            "type": "node",
             "request": "attach",
             "name": "Attach",
             "port": 9229
