@@ -6,7 +6,7 @@ Node.js application that allows you to play Tic Tac Toe. Created for the hiring 
 ![Tic Tac Toe](/screenshots/o-win.PNG?raw=true "Screenshot 1: O Win")
 
 ## Short demo:
-Check on [here](https://youtu.be/OPCPbDu_TrM)
+Check on [here](https://youtu.be/M_9ba5GEX_g)
 
 ## Live app:
 You can run the [deployed app here](https://aw-tic-tac-toe.herokuapp.com/).
