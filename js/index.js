@@ -18,8 +18,10 @@ $(document).ready(function () {
             boardSize = size;
             reDraw();
             $("#error-size").html("")
+            $("#error-size").css("display", "none")
         } else {
             $("#error-size").html("Minimum value is 3")
+            $("#error-size").css("display", "block")
         }
     })
 
@@ -28,8 +30,10 @@ $(document).ready(function () {
         if (!isNaN(size) && size >= 3) {
             match = size
             $("#error-match").html("")
+            $("#error-match").css("display", "none")
         } else {
             $("#error-match").html("Minimum value is 3")
+            $("#error-match").css("display", "block")
         }
     })
 
