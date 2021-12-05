@@ -2,6 +2,9 @@
 
 Node.js application that allows you to play Tic Tac Toe. Created for the hiring process on FWD Singapore as Senior Fullstack Nodejs Developer.
 
+## Screenshots:
+![Tic Tac Toe](/screenshots/o-win.PNG?raw=true "Screenshot 1: O Win")
+
 ## Live app:
 You can run the [deployed app here](https://aw-tic-tac-toe.herokuapp.com/).
 
