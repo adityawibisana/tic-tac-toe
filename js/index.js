@@ -15,8 +15,11 @@ $(document).ready(function () {
     $("#board_size").on("input", function () {
         const size = parseInt(this.value, 10)
         if (!isNaN(size) && size >= 3) {
-            boardSize = size
-            reDraw()
+            boardSize = size;
+            reDraw();
+            $("#error-size").html("")
+        } else {
+            $("#error-size").html("Minimum value is 3")
         }
     })
 
@@ -24,6 +27,9 @@ $(document).ready(function () {
         const size = parseInt(this.value, 10)
         if (!isNaN(size) && size >= 3) {
             match = size
+            $("#error-match").html("")
+        } else {
+            $("#error-match").html("Minimum value is 3")
         }
     })
 

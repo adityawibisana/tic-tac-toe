@@ -16,4 +16,4 @@ body{font-family: 'Signika', sans-serif;}
 .input-append .win_times {background:#fff; width:101px}
 .input-append .win_text {width:52px}
 .center {margin: auto; width: 50%; padding: 10px;}
-
+.error-label{color:red;font-style: italic;padding-top: 4px;}
