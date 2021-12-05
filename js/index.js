@@ -68,15 +68,21 @@ $(document).ready(function () {
                 console.log(printChar)
             }
 
-            if (isWin(boxes, x)) {
+            const xWin = isWin(boxes, x, match)
+            if (xWin) {
                 x_win++;
                 $('#x_win').html(`${x_win}`)
-                showWinnerAndReset(x)
-            } else if (isWin(boxes, o)) {
+                return showWinnerAndReset(x, xWin)
+            }
+
+            const oWin = isWin(boxes, o, match)
+            if (oWin) {
                 o_win++;
                 $('#o_win').html(`${o_win}`)
-                showWinnerAndReset(o)
-            } else if (count >= boardSize * boardSize) {
+                return showWinnerAndReset(o, oWin)
+            }
+
+            if (count >= boardSize * boardSize) {
                 setTimeout(() => {
                     alert(`Tie. Game will be restarted`)
                     reset()
@@ -86,9 +92,13 @@ $(document).ready(function () {
         reset()
     }
 
-    function showWinnerAndReset(winner) {
+    function showWinnerAndReset(winner, winPos) {
+        for (let i = 0; i < winPos.length; i++) {
+            console.log(`Win position:${winPos[i][0]}-${winPos[i][1]}`)
+            $(`#${winPos[i][0]}-${winPos[i][1]}`).addClass('winbox')
+        }
         setTimeout(() => {
-            alert(`${winner} has won the game. Game will be restarted`)
+            alert(`${winner} has won the game.Game will be restarted`)
             reset()
         }, 0);
     }
@@ -100,82 +110,96 @@ $(document).ready(function () {
         $("#game td div").removeClass('x')
         $("#game td div").removeClass('btn-primary')
         $("#game td div").removeClass('btn-info')
+        $("#game td div").removeClass('winbox')
         boxes = new Array(boardSize).fill("-").map(() => new Array(boardSize).fill("-"));
         count = 0
     }
 
-    function isWin(boxes, character) {
-        return isWinningHorizontal(boxes, character)
-            || isWinningVertical(boxes, character)
-            || isWinningDiagonal(boxes, character)
-            || isWinningDiagonalBack(boxes, character)
+    function isWin(boxes, character, match) {
+        return getHorizontalWinPositions(boxes, character, match)
+            || getVerticalWinPositions(boxes, character, match)
+            || getDiagonalWinPositions(boxes, character, match)
+            || getDiagonalBackWinPositions(boxes, character, match)
     }
 
     /**
-   * Check whether specified character win the game, based on its horizontal position
-   * @param {Array.<string[]>} boxes 2 dimensional array
-   * @param {String} character O or X
-   * @returns {Boolean} true, if specified character win
-   */
-    function isWinningHorizontal(boxes, character) {
+    * Get horizontal win positions of the specified character.
+    * @param {Array.<string[]>} boxes 2 dimensional array
+    * @param {String} character O or X
+    * @param {Integer} adjacentNumber number of adjacent-horizontal O and X required to win
+    * @returns {Array} list of horizontal win positions (row-column-index). Null if there aren't any.
+    */
+    function getHorizontalWinPositions(boxes, character, adjacentNumber) {
         let counter = 0
+        let winPos = []
         for (let i = 0; i < boxes.length; i++) {
             const box = boxes[i];
             for (let j = 0; j < box.length; j++) {
                 if (boxes[i][j] === character) {
                     counter++
+                    winPos.push([i, j])
                 } else {
                     counter = 0
+                    winPos = []
                 }
 
-                if (counter === match) { // we have winner
-                    return true
+                if (counter === adjacentNumber) { // we have winner
+                    return winPos
                 }
             }
             counter = 0
+            winPos = []
         }
-        return false
+        return null
     }
 
     /**
-     * Check whether specified character win the game, based on its vertical position
-     * @param {Array.<string[]>} boxes 2 dimensional array containing O or X
-     * @param {String} character O or X
-     * @returns {Boolean} true, if specified character win
-     */
-    function isWinningVertical(boxes, character) {
+    * Get vertical win positions of the specified character.
+    * @param {Array.<string[]>} boxes 2 dimensional array
+    * @param {String} character O or X
+    * @param {Integer} adjacentNumber number of adjacent-vertical O or X required to win
+    * @returns {Array} list of vertical win positions (row-column-index). Null if there aren't any.
+    */
+    function getVerticalWinPositions(boxes, character, adjacentNumber) {
         let counter = 0
+        let winPos = []
         for (let j = 0; j < boxes.length; j++) {
             for (let i = 0; i < boxes.length; i++) {
                 const box = boxes[i];
                 if (boxes[i][j] === character) {
                     counter++
+                    winPos.push([i, j])
                 } else {
                     counter = 0
+                    winPos = []
                 }
 
-                if (counter === match) {
-                    return true
+                if (counter === adjacentNumber) {
+                    return winPos
                 }
             }
             counter = 0
+            winPos = []
         }
-        return false
+        return null
     }
 
     /**
-     * Check whether specified character win the game, based on its diagonal position
-     * @param {Array.<string[]>} boxes 2 dimensional array containing O or X
-     * @param {String} character O or X
-     * @returns {Boolean} true, if specified character win
-     */
-    function isWinningDiagonal(boxes, character) {
+    * Get diagonal win positions of the specified character.
+    * @param {Array.<string[]>} boxes 2 dimensional array
+    * @param {String} character O or X
+    * @param {Integer} adjacentNumber number of adjacent-diagonal O or X required to win
+    * @returns {Array} list of diagonal win positions (row-column-index). Null if there aren't any.
+    */
+    function getDiagonalWinPositions(boxes, character, adjacentNumber) {
         let counter = 0;
+        let winPos = []
         for (let i = 0; i < boxes.length; i++) {
             const box = boxes[i];
             for (let j = 0; j < box.length; j++) {
                 if (boxes[i][j] === character) {
                     counter++
+                    winPos.push([i, j])
                     // use new variable because we don't want to interfere current iteration
                     let row = i;
                     let column = j;
@@ -184,34 +208,41 @@ $(document).ready(function () {
                         column++;
                         if (boxes[row][column] === character) {
                             counter++
+                            winPos.push([row, column])
                         } else {
                             counter = 0
+                            winPos = []
                         }
-                        if (counter === match) {
-                            return true
+                        if (counter === adjacentNumber) {
+                            return winPos
                         }
                     }
                 }
                 counter = 0;
+                winPos = []
             }
             counter = 0
+            winPos = []
         }
-        return false
+        return null
     }
 
     /**
-    * Check whether specified character win the game, based on its diagonal-back position
-    * @param {Array.<string[]>} boxes 2 dimensional array containing O or X
+    * Get diagonal-back win positions of the specified character.
+    * @param {Array.<string[]>} boxes 2 dimensional array
     * @param {String} character O or X
-    * @returns {Boolean} true, if specified character win
+    * @param {Integer} adjacentNumber number of adjacent-diagonal-back O or X required to win
+    * @returns {Array} list of diagonal-back win positions (row-column-index). Null if there aren't any.
     */
-    function isWinningDiagonalBack(boxes, character) {
+    function getDiagonalBackWinPositions(boxes, character, adjacentNumber) {
+        let winPos = []
         for (let i = 0; i < boxes.length; i++) {
             let box = boxes[i];
             for (let j = box.length - 1; j >= 0; j--) {
                 counter = 0;
                 if (boxes[i][j] === character) {
                     counter++
+                    winPos.push([i, j])
 
                     // use new variable because we don't want to interfere current iteration
                     let row = i;
@@ -221,17 +252,19 @@ $(document).ready(function () {
                         column--;
                         if (boxes[row][column] === character) {
                             counter++
+                            winPos.push([row, column])
                         } else {
                             counter = 0
+                            winPos = []
                         }
 
-                        if (counter === match) {
-                            return true
+                        if (counter === adjacentNumber) {
+                            return winPos
                         }
                     }
                 }
             }
         }
-        return false
+        return null
     }
 });
