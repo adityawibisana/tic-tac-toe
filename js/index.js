@@ -126,10 +126,10 @@ $(document).ready(function () {
     * Get horizontal win positions of the specified character.
     * @param {Array.<string[]>} boxes 2 dimensional array
     * @param {String} character O or X
-    * @param {Integer} match number of O or X required to win in horizontal
+    * @param {Integer} adjacentNumber number of adjacent-horizontal O and X required to win
     * @returns {Array} list of horizontal win positions (row-column-index). Null if there aren't any.
     */
-    function getHorizontalWinPositions(boxes, character, match) {
+    function getHorizontalWinPositions(boxes, character, adjacentNumber) {
         let counter = 0
         let winPos = []
         for (let i = 0; i < boxes.length; i++) {
@@ -143,7 +143,7 @@ $(document).ready(function () {
                     winPos = []
                 }
 
-                if (counter === match) { // we have winner
+                if (counter === adjacentNumber) { // we have winner
                     return winPos
                 }
             }
@@ -157,10 +157,10 @@ $(document).ready(function () {
     * Get vertical win positions of the specified character.
     * @param {Array.<string[]>} boxes 2 dimensional array
     * @param {String} character O or X
-    * @param {Integer} number of O and X required to win in vertical
+    * @param {Integer} adjacentNumber number of adjacent-vertical O or X required to win
     * @returns {Array} list of vertical win positions (row-column-index). Null if there aren't any.
     */
-    function getVerticalWinPositions(boxes, character, match) {
+    function getVerticalWinPositions(boxes, character, adjacentNumber) {
         let counter = 0
         let winPos = []
         for (let j = 0; j < boxes.length; j++) {
@@ -174,7 +174,7 @@ $(document).ready(function () {
                     winPos = []
                 }
 
-                if (counter === match) {
+                if (counter === adjacentNumber) {
                     return winPos
                 }
             }
@@ -188,10 +188,10 @@ $(document).ready(function () {
     * Get diagonal win positions of the specified character.
     * @param {Array.<string[]>} boxes 2 dimensional array
     * @param {String} character O or X
-    * @param {Integer} number of O and X required to win in diagonal
+    * @param {Integer} adjacentNumber number of adjacent-diagonal O or X required to win
     * @returns {Array} list of diagonal win positions (row-column-index). Null if there aren't any.
     */
-    function getDiagonalWinPositions(boxes, character, match) {
+    function getDiagonalWinPositions(boxes, character, adjacentNumber) {
         let counter = 0;
         let winPos = []
         for (let i = 0; i < boxes.length; i++) {
@@ -213,7 +213,7 @@ $(document).ready(function () {
                             counter = 0
                             winPos = []
                         }
-                        if (counter === match) {
+                        if (counter === adjacentNumber) {
                             return winPos
                         }
                     }
@@ -231,10 +231,10 @@ $(document).ready(function () {
     * Get diagonal-back win positions of the specified character.
     * @param {Array.<string[]>} boxes 2 dimensional array
     * @param {String} character O or X
-    * @param {Integer} match number of O and X required to win in horizontal
+    * @param {Integer} adjacentNumber number of adjacent-diagonal-back O or X required to win
     * @returns {Array} list of diagonal-back win positions (row-column-index). Null if there aren't any.
     */
-    function getDiagonalBackWinPositions(boxes, character, match) {
+    function getDiagonalBackWinPositions(boxes, character, adjacentNumber) {
         let winPos = []
         for (let i = 0; i < boxes.length; i++) {
             let box = boxes[i];
@@ -258,7 +258,7 @@ $(document).ready(function () {
                             winPos = []
                         }
 
-                        if (counter === match) {
+                        if (counter === adjacentNumber) {
                             return winPos
                         }
                     }
